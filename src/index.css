@@ -1,0 +1,9 @@
+.contact {
+    border: 1px solid #e0e1e8;
+}
+
+.imagenContacto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
