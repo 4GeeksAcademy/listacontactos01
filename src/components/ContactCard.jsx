@@ -1,31 +1,10 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const ContactCard = (props) => {
-
-    const slug = "carlosagenda1";
-
     useEffect(()=>{
-       
+
     },[])
-
-
-    const eliminarContacto = (id) => {
-        console.log('eliminando ' + id);
-
-        fetch('https://playground.4geeks.com/contact/agendas/' + slug + '/contacts/' + id, {
-			method: "DELETE"
-		})
-		.then(resp => {
-			return resp;
-		})
-		.then(data => {
-
-		})
-		.catch(error => {
-			// Manejo de errores
-			console.log(error);
-		});
-    }
 
     return (
         <div className="row contact">
@@ -43,9 +22,11 @@ const ContactCard = (props) => {
                         <span className="text-muted"><i className="fa-solid fa-envelope"></i> {props.informacion.email}</span>
                     </div>
                     <div className="col-3">
-                    
-                        <a href="https://www.google.com/" className="me-4 text-dark"><i className="fa-solid fa-pen"></i></a>
-                        <span onClick={()=>eliminarContacto(props.informacion.id)}><i className="fa-solid fa-trash"></i></span>
+                        <Link to={'/addContact/' + props.informacion.id}>
+                            <span className="me-4 text-dark"><i className="fa-solid fa-pen"></i></span>
+                        </Link>
+                        
+                        <span onClick={()=>props.funcionalidad(props.informacion.id)}><i className="fa-solid fa-trash"></i></span>
                     
                     </div>
                 </div>
