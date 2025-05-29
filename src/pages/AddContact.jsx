@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import nombreAgenda from './../variables'
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 const AddContact = () => {
 
 
+    const { store, dispatch } = useGlobalReducer();
+    
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [phone,setPhone] = useState("");
@@ -45,8 +48,8 @@ const AddContact = () => {
                 return resp.json();
             })
             .then(data => {
-            
-            
+
+                dispatch({ type: 'add_contacto', payload: data });
 
                 alert("Contacto registrado correctamente!");
                 setName('');

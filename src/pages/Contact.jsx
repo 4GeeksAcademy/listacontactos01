@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import ContactCard from '../components/ContactCard'
 import { useEffect, useState } from 'react';
 import nombreAgenda from './../variables'
+import useGlobalReducer from '../hooks/useGlobalReducer';
 
 const Contact = () => {
 
 
+    const { store, dispatch } = useGlobalReducer();
     const [lstContactos,setLstContactos] = useState([]);
     const slug = nombreAgenda;
 
@@ -26,6 +28,10 @@ const Contact = () => {
 			
 			setLstContactos(contactosApi);
 
+
+
+            console.log('**************iNFO STORE***********');
+            console.log(store);
 
 		})
 		.catch(error => {
@@ -50,6 +56,10 @@ const Contact = () => {
                 const listaNueva = lstContactos.filter(x => x.id != paramId);
   
                 setLstContactos(listaNueva);
+
+                dispatch({ type: 'remove_contacto', payload: { id: paramId } });
+
+                console.log(store);
 
             })
             .catch(error => {
