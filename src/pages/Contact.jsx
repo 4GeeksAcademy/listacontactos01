@@ -12,7 +12,24 @@ const Contact = () => {
     const slug = nombreAgenda;
 
 
-    const obtenerContactos = () => {
+    const obtenerContactos = async () => {
+
+
+        const responseAgenda = await fetch('https://playground.4geeks.com/contact/agendas/carlosagenda1');
+        const infoAgenda = await responseAgenda.json();
+
+        if(responseAgenda.status == 404){
+            const responseGuardaAgenda = await fetch('https://playground.4geeks.com/contact/agendas/carlosagenda1',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const info = await responseGuardaAgenda.json();
+            console.log(info);
+        }
+
+
         fetch('https://playground.4geeks.com/contact/agendas/' + slug + '/contacts', {
 			method: "GET"
 		})
